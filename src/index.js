@@ -17,6 +17,7 @@ const rerenderEntireTree = (state) => {
     </React.StrictMode>
   );
 };
+
 rerenderEntireTree(store.getState());
 store.subscribe(() => {
   rerenderEntireTree(store.getState());
