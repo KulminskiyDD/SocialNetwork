@@ -16,11 +16,11 @@ const MessageItem = (props) => {
 
 const Dialogs = (props) => {
   const onSendMessageClick = () => {
-    props.sendMessage();
+    props.sendMessageTask();
   };
 
   const onMessageBodyChange = (e) => {
-    props.updateNewMessageBody(e.target.value);
+    props.updateNewMessageBodyTask(e.target.value);
   };
 
   return (

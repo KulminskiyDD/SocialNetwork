@@ -1,11 +1,5 @@
 import React from "react";
 import Dialogs from "./Dialogs";
-/*import StoreContext from "../StoreContext";
-import {
-  sendMessageActionCreator,
-  updateNewMessageBodyActionCreator,
-} from "../redux/dialogsReducer";
-*/
 import { useDispatch } from "react-redux";
 import {
   sendMessage,
@@ -28,8 +22,8 @@ const DialogsContainer = () => {
 
   return (
     <Dialogs
-      updateNewMessageBody={onMessageBodyChange}
-      sendMessage={onSendMessageClick}
+      updateNewMessageBodyTask={onMessageBodyChange}
+      sendMessageTask={onSendMessageClick}
       dialogsPage={dialogsPage}
     />
   );
