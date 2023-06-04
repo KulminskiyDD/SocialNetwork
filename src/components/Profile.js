@@ -2,7 +2,7 @@ import React from "react";
 import MyPostsContainer from "./MyPostsContainer";
 import css from "./Profile.module.css";
 
-const Profile = (props) => {
+const Profile = () => {
   return (
     <div className={css.AppContent}>
       <img

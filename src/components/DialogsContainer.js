@@ -1,31 +1,37 @@
 import React from "react";
 import Dialogs from "./Dialogs";
-import StoreContext from "../StoreContext";
+/*import StoreContext from "../StoreContext";
 import {
   sendMessageActionCreator,
   updateNewMessageBodyActionCreator,
 } from "../redux/dialogsReducer";
+*/
+import { useDispatch } from "react-redux";
+import {
+  sendMessage,
+  updateNewMessageBody,
+} from "../redux-toolkit/dialogsSlice";
+import { useSelector } from "react-redux";
 
 const DialogsContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        const onSendMessageClick = () => {
-          store.dispatch(sendMessageActionCreator());
-        };
+  const dispatch = useDispatch();
 
-        const onMessageBodyChange = (body) => {
-          store.dispatch(updateNewMessageBodyActionCreator(body));
-        };
-        return (
-          <Dialogs
-            updateNewMessageBody={onMessageBodyChange}
-            sendMessage={onSendMessageClick}
-            dialogsPage={store.getState().dialogsPage}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
+  const onSendMessageClick = () => {
+    dispatch(sendMessage());
+  };
+
+  const onMessageBodyChange = (newMessage) => {
+    dispatch(updateNewMessageBody({ newMessage }));
+  };
+
+  const dialogsPage = useSelector((state) => state.dialogsPage);
+
+  return (
+    <Dialogs
+      updateNewMessageBody={onMessageBodyChange}
+      sendMessage={onSendMessageClick}
+      dialogsPage={dialogsPage}
+    />
   );
 };
 

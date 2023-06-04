@@ -1,35 +1,28 @@
 import React from "react";
 import MyPosts from "./MyPosts";
-import {
-  addPostActionCreator,
-  updateNewPostActionCreator,
-} from "../redux/profileReducer";
-import StoreContext from "../StoreContext";
+import { useDispatch } from "react-redux";
+import { addPost, updateNewPost } from "../redux-toolkit/profileSlice";
+import { useSelector } from "react-redux";
 
 const MyPostsContainer = () => {
+  const posts = useSelector((state) => state.profilePage.posts);
+  const newPostText = useSelector((state) => state.profilePage.newPostText);
+
+  const dispatch = useDispatch();
+  const addPostTask = () => {
+    dispatch(addPost());
+  };
+  const onPostChange = (newText) => {
+    dispatch(updateNewPost({ newText }));
+  };
+
   return (
-    <StoreContext.Consumer>
-      {(store) => {
-        const state = store.getState();
-
-        const addPost = () => {
-          store.dispatch(addPostActionCreator());
-        };
-
-        const onPostChange = (text) => {
-          store.dispatch(updateNewPostActionCreator(text));
-        };
-
-        return (
-          <MyPosts
-            updateNewPost={onPostChange}
-            addPost={addPost}
-            posts={state.profilePage.posts}
-            newPostText={state.profilePage.newPostText}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
+    <MyPosts
+      updateNewPostTask={onPostChange}
+      addPostTask={addPostTask}
+      posts={posts}
+      newPostText={newPostText}
+    />
   );
 };
 
